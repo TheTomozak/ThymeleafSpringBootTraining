@@ -9,7 +9,7 @@ body {
     background-color: #1F2739;
 }
 
-h1 {
+h1{
     font-size: 3em;
     font-weight: 300;
     line-height: 1em;
@@ -97,9 +97,4 @@ th{
     transition-property: all;
 }
 
-@media (max-width: 800px) {
-    .container td:nth-child(4),
-    .container th:nth-child(4) {
-        display: none;
-    }
-}
+

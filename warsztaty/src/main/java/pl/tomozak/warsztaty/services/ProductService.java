@@ -8,6 +8,9 @@ import org.springframework.stereotype.Service;
 import pl.tomozak.warsztaty.models.Product;
 import pl.tomozak.warsztaty.models.TypeOfProduct;
 
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+
 @Service
 public class ProductService {
 
@@ -26,6 +29,30 @@ public class ProductService {
 
     public Iterable<Product> showListOfProduct(){
         return _product.findAll();
+    }
+
+    public String[] howManyDaysToPremiereCyberpunk(){
+        LocalDate actualDate = LocalDate.now();
+        LocalDate premiereCyberpunk = LocalDate.parse("2020-12-10");
+
+        String[] arrayText = new String[2];
+        long dayToWait = ChronoUnit.DAYS.between(actualDate, premiereCyberpunk);
+
+        String dayOrDays = null;
+        String goAndPlay ="";
+        if(dayToWait >=10){
+            dayOrDays = "days";
+        }else if(dayToWait==0){
+            goAndPlay = "Cmon, go and play and remember You're breathtaking! ";
+            dayOrDays = "day";
+        }else {
+            dayOrDays = "day";
+        }
+
+        String timeToWait = "You must wait: " + dayToWait +" "+ dayOrDays + " to premiere cyberpunk" ;
+        arrayText[0] = timeToWait;
+        arrayText[1] = goAndPlay;
+        return arrayText;
     }
 
 

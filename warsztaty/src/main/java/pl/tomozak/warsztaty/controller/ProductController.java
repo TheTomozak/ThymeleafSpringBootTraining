@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.RestController;
 import pl.tomozak.warsztaty.models.Product;
 import pl.tomozak.warsztaty.services.ProductService;
 
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+
 
 @Controller
 class ProductController {
@@ -23,19 +26,25 @@ class ProductController {
     }
 
     @GetMapping("/hello")
-    public String sayMyName(Model model, @RequestParam(required = false, defaultValue = "Heisenberg") String name ){
+    public String sayMyName(Model model, @RequestParam(required = false, defaultValue = "Heisenberg") String name) {
         model.addAttribute("name", name);
         return "helloName";
     }
 
 
     @GetMapping("/getProducts")
-    public String getProducts(Model model){
+    public String getProducts(Model model) {
         model.addAttribute("productLists", productService.showListOfProduct());
         return "listProducts";
     }
 
-
+    @GetMapping("/getCyberpunk")
+    public String howManyDaysToPremiere(Model model) {
+        String[] arrayOfText = productService.howManyDaysToPremiereCyberpunk();
+        model.addAttribute("dayToWaitText", arrayOfText[0]);
+        model.addAttribute("goAndPlay", arrayOfText[1]);
+        return "cyberpunk";
+    }
 
 
 }
